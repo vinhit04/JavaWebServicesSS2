@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -26,7 +25,7 @@ public class UserController {
 
         List<User> users = userService.findAllUsers();
 
-        if (search != null && !search.isEmpty()) {
+        if (search != null && !search.isBlank()) {
             users = users.stream()
                     .filter(user -> user.getUsername()
                             .toLowerCase()

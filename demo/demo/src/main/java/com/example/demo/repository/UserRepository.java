@@ -15,7 +15,10 @@ public class UserRepository {
             new User(3,"anna","anna@gmail.com","MANAGER")
     );
 
-    public List<User> findAll() {
-        return users;
+    public User findById(int id) {
+        return users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElse(null);
     }
 }

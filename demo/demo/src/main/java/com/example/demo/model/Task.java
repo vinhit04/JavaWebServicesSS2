@@ -6,10 +6,10 @@ public class Task {
     private String title;
     private String description;
     private String priority;
-    private String assignedTo;
+    private int assignedTo;
 
     public Task(int id, String title, String description,
-                String priority, String assignedTo) {
+                String priority, int assignedTo) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -33,7 +33,7 @@ public class Task {
         return priority;
     }
 
-    public String getAssignedTo() {
+    public int getAssignedTo() {
         return assignedTo;
     }
 }

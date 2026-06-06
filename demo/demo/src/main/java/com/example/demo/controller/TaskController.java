@@ -35,4 +35,18 @@ public class TaskController {
 
         return ResponseEntity.ok(tasks);
     }
+    @PostMapping
+    public ResponseEntity<?> createTask(
+            @RequestBody Task newTask) {
+
+        boolean success = taskService.addTask(newTask);
+
+        if (success) {
+            return ResponseEntity.status(201)
+                    .body("Task created successfully");
+        }
+
+        return ResponseEntity.badRequest()
+                .body("Assigned user does not exist");
+    }
 }
