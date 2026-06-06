@@ -1,39 +1,38 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.User;
-import com.example.demo.service.UserService;
+import com.example.demo.model.Task;
+import com.example.demo.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/tasks")
+public class TaskController {
 
-    private final UserService userService;
+    private final TaskService taskService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllUsers(
+    public ResponseEntity<List<Task>> getAllTasks(
             @RequestParam(required = false) String search) {
 
-        List<User> users = userService.findAllUsers();
+        List<Task> tasks = taskService.findAllTasks();
 
         if (search != null && !search.isEmpty()) {
-            users = users.stream()
-                    .filter(user -> user.getUsername()
+            tasks = tasks.stream()
+                    .filter(task -> task.getTitle()
                             .toLowerCase()
                             .contains(search.toLowerCase()))
                     .toList();
         }
 
-        return ResponseEntity.ok(users);
+        return ResponseEntity.ok(tasks);
     }
 }
